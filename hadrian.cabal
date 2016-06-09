@@ -64,6 +64,7 @@ executable hadrian
                        , Rules.Program
                        , Rules.Register
                        , Rules.Selftest
+                       , Rules.Sdist
                        , Rules.Test
                        , Rules.Wrappers.Ghc
                        , Rules.Wrappers.GhcPkg

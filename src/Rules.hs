@@ -19,6 +19,7 @@ import qualified Rules.Library
 import qualified Rules.Perl
 import qualified Rules.Program
 import qualified Rules.Register
+import qualified Rules.Sdist
 import Settings
 
 allStages :: [Stage]
@@ -76,7 +77,8 @@ packageRules = do
         , Rules.Library.buildPackageGhciLibrary
         , Rules.Generate.generatePackageCode
         , Rules.Program.buildProgram readPackageDb
-        , Rules.Register.registerPackage writePackageDb ]
+        , Rules.Register.registerPackage writePackageDb
+        , Rules.Sdist.buildSourceDist ]
 
 buildRules :: Rules ()
 buildRules = do
