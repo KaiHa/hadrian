@@ -1,7 +1,7 @@
 module Rules.Actions (
     build, buildWithCmdOptions, buildWithResources, copyFile, fixFile, moveFile,
     removeFile, copyDirectory, createDirectory, moveDirectory, removeDirectory,
-    applyPatch, runBuilder, makeExecutable, renderProgram, renderLibrary
+    applyPatch, runBuilder, runBuilderWith, makeExecutable, renderProgram, renderLibrary
     ) where
 
 import qualified System.Directory       as IO
@@ -152,12 +152,16 @@ applyPatch dir patch = do
     quietly $ cmd Shell cmdEcho [Cwd dir] [path, "-p0 <", patch]
 
 runBuilder :: Builder -> [String] -> Action ()
-runBuilder builder args = do
+runBuilder =
+    runBuilderWith []
+
+runBuilderWith :: [CmdOption] -> Builder -> [String] -> Action ()
+runBuilderWith options builder args = do
     needBuilder builder
     path <- builderPath builder
     let note = if null args then "" else " (" ++ intercalate ", " args ++ ")"
     putBuild $ "| Run " ++ show builder ++ note
-    quietly $ cmd [path] args
+    quietly $ cmd options [path] args
 
 makeExecutable :: FilePath -> Action ()
 makeExecutable file = do
