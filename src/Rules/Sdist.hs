@@ -21,7 +21,6 @@ sourceDistRules = do
         cpDir  "cfg"
         cpDir  "doc"
         cpDir  "src"
-        cpDir  "src"
         cpFile "LICENSE"
         cpFile "Makefile"
         cpFile "README.md"
