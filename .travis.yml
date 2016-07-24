@@ -54,10 +54,10 @@ install:
     - ghc-pkg list
 
 script:
-    - ( cd ghc/hadrian && cabal haddock --internal )
     - ./ghc/hadrian/build.cabal.sh selftest
     - ./ghc/hadrian/build.cabal.sh -j --verbose --no-progress --progress-colour=never --profile=- --flavour=$FLAVOUR $TARGET
     - ./ghc/inplace/bin/ghc-stage2 -e 1+2
+    - ( cd ghc/hadrian && cabal haddock --internal )
 
 cache:
     directories:
